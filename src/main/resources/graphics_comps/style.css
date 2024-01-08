@@ -27,7 +27,7 @@
 .logo-login {
     -fx-font-family: "Arial Black", Gadget, sans-serif;  
     -fx-font-size: 18px;
-    -fx-text-fill: #000000; /* Cor do texto (azul claro no exemplo) */
+    -fx-text-fill: #000000; 
     -fx-font-weight: bold;
     -fx-padding: 10 20;
 }
