@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="250.0" spacing="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics_comps.CadastroController">
+    <children>
+       <AnchorPane prefHeight="358.0" prefWidth="240.0" styleClass="fundo-login" stylesheets="@login&amp;cadastro.css">
+         <children>
+            <Label layoutX="15.0" layoutY="31.0" styleClass="mensagem-cadastro" stylesheets="@login&amp;cadastro.css" text="Estamos felizes em recebe-lo!" />
+            <Label layoutX="63.0" layoutY="6.0" prefHeight="35.0" prefWidth="125.0" styleClass="mensagem-cadastro" stylesheets="@login&amp;cadastro.css" text="Bem Vindo :0" />
+            <TextField fx:id="entradaCpf" layoutX="51.0" layoutY="161.0" promptText="Digite seu CPF" styleClass="entrada-dados" stylesheets="@login&amp;cadastro.css" />
+            <TextField layoutX="51.0" layoutY="136.0" promptText="Nome completo" styleClass="entrada-dados" stylesheets="@login&amp;cadastro.css" />
+            <PasswordField layoutX="51.0" layoutY="186.0" promptText="Crie uma senha" styleClass="entrada-dados" stylesheets="@login&amp;cadastro.css" />
+            <PasswordField layoutX="51.0" layoutY="211.0" promptText="Verifique a senha" styleClass="entrada-dados" stylesheets="@login&amp;cadastro.css" />
+            <Button layoutX="91.0" layoutY="259.0" mnemonicParsing="false" styleClass="botao-entrar" stylesheets="@login&amp;cadastro.css" text="Cadastrar" />
+            <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#voltar" prefHeight="17.0" prefWidth="11.0" styleClass="botao-voltar" stylesheets="@login&amp;cadastro.css" text="&lt;" />
+            <DatePicker layoutX="51.0" layoutY="82.0" prefHeight="25.0" prefWidth="149.0" promptText="Data de nascimento" stylesheets="@login&amp;cadastro.css" />
+         </children></AnchorPane>
+    </children>
+ </VBox>
