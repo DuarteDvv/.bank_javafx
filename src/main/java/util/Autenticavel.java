@@ -2,6 +2,6 @@ package util;
 
 public interface Autenticavel {
 
-    public boolean autentica(int senha);
+    public boolean autentica(String senha);
 
 }

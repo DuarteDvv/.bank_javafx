@@ -1,8 +1,6 @@
 package model;
 
-import util.Tributavel;
-
-public class SeguroVida implements Tributavel {
+public class SeguroVida extends PlanosDeAuxilio {
 
     private double valor;
     private int numeroApolice;

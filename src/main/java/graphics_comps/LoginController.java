@@ -18,12 +18,22 @@ public class LoginController implements Initializable {
     private PasswordField entradaSenha;
 
     @FXML
+    private TextField senhaVisivel;
+
+    @FXML
     private CheckBox checkVisivel;
+
+    @FXML
+    private CheckBox checkColaborador;
+
+    @FXML
+    private TextField loginID;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         validaCpf();
         tornarSenhaVisivel();
+        ativarColab();
     }
 
     public void validaCpf() {
@@ -38,7 +48,27 @@ public class LoginController implements Initializable {
     }
 
     public void tornarSenhaVisivel() {
+        checkVisivel.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                entradaSenha.setVisible(false);
+                senhaVisivel.setVisible(true);
+                senhaVisivel.setText(entradaSenha.getText());
+            } else {
+                entradaSenha.setVisible(true);
+                senhaVisivel.setVisible(false);
+                entradaSenha.setText(senhaVisivel.getText());
+            }
+        });
+    }
 
+    public void ativarColab() {
+        checkColaborador.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                loginID.setVisible(true);
+            } else {
+                loginID.setVisible(false);
+            }
+        });
     }
 
     @FXML
