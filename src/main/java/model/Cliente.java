@@ -1,12 +1,9 @@
 package model;
 
 import util.Autenticavel;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Cliente implements Autenticavel, Comparable<Cliente> {
 
@@ -14,14 +11,13 @@ public class Cliente implements Autenticavel, Comparable<Cliente> {
     private String nome;
     private Date dataNascimento;
     private String senha;
-    private List<Conta> contas = new ArrayList<>();
-    private List<PlanosDeAuxilio> planos = new ArrayList<>();
+    private Set<Conta> contas = new HashSet<>();
+    private Set<PlanosDeAuxilio> planos = new HashSet<>();
 
     @Override
     public boolean autentica(String senha) {
         // ...
         return true;
-
     }
 
     @Override
@@ -32,31 +28,30 @@ public class Cliente implements Autenticavel, Comparable<Cliente> {
 
         Cliente client = (Cliente) object;
         return client.cpf.equals(this.cpf);
-
     }
 
     @Override
     public int compareTo(Cliente outroCliente) {
+        if (this.nome == null || outroCliente.nome == null) {
+            return 0;
+        }
         return this.nome.compareToIgnoreCase(outroCliente.nome);
-
     }
 
     public void criarConta(Conta novaConta) {
-
         contas.add(novaConta);
     }
 
     public void apagarConta(Conta contaParaApagar) {
-
         contas.remove(contaParaApagar);
     }
 
-    public List<Conta> getContas() {
-        return Collections.unmodifiableList(contas);
+    public Set<Conta> getContas() {
+        return Collections.unmodifiableSet(contas);
     }
 
-    public List<PlanosDeAuxilio> getPlanos() {
-        return Collections.unmodifiableList(planos);
+    public Set<PlanosDeAuxilio> getPlanos() {
+        return Collections.unmodifiableSet(planos);
     }
 
 }
