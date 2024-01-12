@@ -2,12 +2,8 @@ package model;
 
 import util.Autenticavel;
 
-public class Gerente extends Funcionario implements Autenticavel {
+public class Gerente extends Funcionario  {
 
-    @Override
-    public boolean autentica(String senha) {
-        //
-        return false;
-    }
+   
 
 }

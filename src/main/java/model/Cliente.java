@@ -5,20 +5,13 @@ import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Cliente implements Autenticavel, Comparable<Cliente> {
+public class Cliente implements Comparable<Cliente> {
 
     private String cpf;
     private String nome;
     private Date dataNascimento;
-    private String senha;
     private Set<Conta> contas = new HashSet<>();
     private Set<PlanosDeAuxilio> planos = new HashSet<>();
-
-    @Override
-    public boolean autentica(String senha) {
-        // ...
-        return true;
-    }
 
     @Override
     public boolean equals(Object object) {

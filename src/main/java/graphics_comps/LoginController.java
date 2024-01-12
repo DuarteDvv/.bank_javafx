@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
+import model.Cliente;
+
 import java.net.URL;
 
 public class LoginController implements Initializable {
@@ -34,7 +36,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField loginID;
 
-    private Map<String, String> usuarios = new HashMap<>();
+    private Map<Cliente, String> clientes = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,9 +44,6 @@ public class LoginController implements Initializable {
         tornarSenhaVisivel();
         ativarColab();
 
-        // Adicionar usuários ao mapa (com senhas criptografadas)
-        usuarios.put("12345678909", hash("senha123"));
-        usuarios.put("11122233344", hash("senha456"));
     }
 
    public void validaCpf() {
@@ -58,51 +57,56 @@ public class LoginController implements Initializable {
     });
     }
 
-public void tornarSenhaVisivel() {
-    checkVisivel.selectedProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue) {
-            entradaSenha.setVisible(false);
-            senhaVisivel.setVisible(true);
-            senhaVisivel.setText(entradaSenha.getText());
-        } else {
-            entradaSenha.setVisible(true);
-            senhaVisivel.setVisible(false);
-            entradaSenha.setText(senhaVisivel.getText());
-        }
-    });
-}
+    public void tornarSenhaVisivel() {
+        checkVisivel.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                entradaSenha.setVisible(false);
+                senhaVisivel.setVisible(true);
+                senhaVisivel.setText(entradaSenha.getText());
+            } else {
+                entradaSenha.setVisible(true);
+                senhaVisivel.setVisible(false);
+                entradaSenha.setText(senhaVisivel.getText());
+            }
+        });
+    }
 
-public void ativarColab() {
-    checkColaborador.selectedProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue) {
-            loginID.setVisible(true);
-        } else {
-            loginID.setVisible(false);
-        }
-    });
-}
+    public void ativarColab() {
+        checkColaborador.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                loginID.setVisible(true);
+            } else {
+                loginID.setVisible(false);
+            }
+        });
+    }
 
     @FXML
     private void entrar() throws IOException {
         String cpf = entradaCpf.getText();
         String senha = entradaSenha.getText();
-
-        if (usuarios.containsKey(cpf)) {
-            if (!usuarios.get(cpf).equals(hash(senha))) {
+        
+        if(!checkColaborador.isSelected()){
+            if (clientes.containsKey(cpf)) {
+                if (!clientes.get(cpf).equals(hash(senha))) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Erro");
+                    alert.setHeaderText("Senha incorreta");
+                    alert.setContentText("A senha fornecida não corresponde ao CPF cadastrado.");
+                    alert.showAndWait();
+                } else {
+                    App.setRoot("secondary");
+                }
+            } else {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Erro");
-                alert.setHeaderText("Senha incorreta");
-                alert.setContentText("A senha fornecida não corresponde ao CPF cadastrado.");
+                alert.setHeaderText("CPF não cadastrado");
+                alert.setContentText("O CPF fornecido não está cadastrado no sistema.");
                 alert.showAndWait();
-            } else {
-                App.setRoot("secondary");
             }
-        } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("CPF não cadastrado");
-            alert.setContentText("O CPF fornecido não está cadastrado no sistema.");
-            alert.showAndWait();
+        }
+        else{
+
         }
     }
 
