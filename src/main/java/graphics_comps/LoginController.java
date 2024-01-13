@@ -1,11 +1,6 @@
 package graphics_comps;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,8 +8,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
 import model.Cliente;
+import util.PseudoDB;
 
 import java.net.URL;
+import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
@@ -36,7 +33,8 @@ public class LoginController implements Initializable {
     @FXML
     private TextField loginID;
 
-    private Map<Cliente, String> clientes = new HashMap<>();
+    @FXML
+    private Button botaoEntrar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,15 +44,23 @@ public class LoginController implements Initializable {
 
     }
 
-   public void validaCpf() {
-    entradaCpf.textProperty().addListener((observable, oldValue, newValue) -> {
-        String cpfValidado = newValue.replaceAll("[^\\d]", "");
-        if (cpfValidado.length() > 11) {
-            cpfValidado = cpfValidado.substring(0, 11);
-        }
+    public void validaCpf() {
+        entradaCpf.textProperty().addListener((observable, oldValue, newValue) -> {
+            String cpfValidado = newValue.replaceAll("[^\\d]", "");
+            if (cpfValidado.length() > 11) {
+                cpfValidado = cpfValidado.substring(0, 11);
+            }
 
-        entradaCpf.setText(cpfValidado);
-    });
+            if (cpfValidado.length() < 11) {
+                botaoEntrar.setDisable(true);
+
+            } else {
+                botaoEntrar.setDisable(false);
+
+            }
+
+            entradaCpf.setText(cpfValidado);
+        });
     }
 
     public void tornarSenhaVisivel() {
@@ -85,27 +91,38 @@ public class LoginController implements Initializable {
     private void entrar() throws IOException {
         String cpf = entradaCpf.getText();
         String senha = entradaSenha.getText();
-        
-        if(!checkColaborador.isSelected()){
-            if (clientes.containsKey(cpf)) {
-                if (!clientes.get(cpf).equals(hash(senha))) {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Erro");
-                    alert.setHeaderText("Senha incorreta");
-                    alert.setContentText("A senha fornecida não corresponde ao CPF cadastrado.");
-                    alert.showAndWait();
+
+        if (!checkColaborador.isSelected()) {
+            Cliente atualClient = PseudoDB.buscarClientePorCpf(cpf);
+            if (atualClient != null) {
+                if (!PseudoDB.verificarSenha(atualClient, senha)) {
+                    new Alert(AlertType.ERROR) {
+                        {
+                            setTitle("Erro");
+                            setHeaderText("Senha incorreta");
+                            setContentText("A senha fornecida não corresponde ao CPF cadastrado.");
+                            showAndWait();
+                        }
+                    };
+
                 } else {
-                    App.setRoot("secondary");
+                    // tranfere o objeto cliente para a proxima pagina
+                    App.setCurrentClient(atualClient);
+                    App.setRoot("paginaCliente");
                 }
             } else {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Erro");
-                alert.setHeaderText("CPF não cadastrado");
-                alert.setContentText("O CPF fornecido não está cadastrado no sistema.");
-                alert.showAndWait();
+                new Alert(AlertType.ERROR) {
+                    {
+                        setTitle("Erro");
+                        setHeaderText("CPF não cadastrado");
+                        setContentText("O CPF fornecido não está cadastrado no sistema.");
+                        showAndWait();
+
+                    }
+                };
+
             }
-        }
-        else{
+        } else { // funcionario
 
         }
     }
@@ -115,15 +132,4 @@ public class LoginController implements Initializable {
         App.setRoot("cadastro");
     }
 
-    // Função para criar hash de senha
-    private String hash(String senha) {
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        byte[] hash = md.digest(senha.getBytes(StandardCharsets.UTF_8));
-        return new String(hash, StandardCharsets.UTF_8);
-    }
 }

@@ -1,7 +1,5 @@
 package model;
 
-import util.Autenticavel;
-
 public abstract class Funcionario {
     private String nome;
     private String cpf;

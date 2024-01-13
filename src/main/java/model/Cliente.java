@@ -1,17 +1,24 @@
 package model;
 
-import util.Autenticavel;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
+import java.time.LocalDate;
 
 public class Cliente implements Comparable<Cliente> {
 
     private String cpf;
     private String nome;
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     private Set<Conta> contas = new HashSet<>();
     private Set<PlanosDeAuxilio> planos = new HashSet<>();
+
+    public Cliente(String cpf, String nome, LocalDate nascimento) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.dataNascimento = nascimento;
+    }
 
     @Override
     public boolean equals(Object object) {
@@ -21,6 +28,10 @@ public class Cliente implements Comparable<Cliente> {
 
         Cliente client = (Cliente) object;
         return client.cpf.equals(this.cpf);
+    }
+
+    public String getCpf() {
+        return this.cpf;
     }
 
     @Override
