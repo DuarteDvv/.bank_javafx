@@ -129,6 +129,11 @@ public class paginaClienteController implements Initializable {
             saldoInicial.setText(nomeValidado);
         });
 
+        depositado.textProperty().addListener((observable, oldValue, newValue) -> {
+            String nomeValidado = newValue.replaceAll("[^\\d]", "");
+            depositado.setText(nomeValidado);
+        });
+
     }
 
     public void inicializaDados() { // colocar observador
@@ -147,13 +152,7 @@ public class paginaClienteController implements Initializable {
         nAuxilios.setText(Integer.toString(planos.size()));
 
         dadosSaldoTotal.setText(calcularSaldoTotal(listaContas.getItems()));
-        tipoDeConta.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (tipoDeConta.isSelected()) {
-                textoTipo.setText("Poupança");
-            } else {
-                textoTipo.setText("Corrente");
-            }
-        });
+
 
     }
 
@@ -180,6 +179,9 @@ public class paginaClienteController implements Initializable {
     @FXML
     private Label textoTipo;
 
+    @FXML
+    private TextField depositado;
+
     public void inicializaContas() {
         listaContas.setCellFactory((listView) -> {
             return new ContaCell();
@@ -200,6 +202,21 @@ public class paginaClienteController implements Initializable {
         // Adicione as contas fictícias (elas agora aparecerão na ListView)
         observableItens.add(new ContaCorrente("Luis"));
         observableItens.add(new ContaCorrente("Oiii"));
+
+        listaContas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue != null) {
+            Conta selecionada = newValue;
+            // Faça algo com a conta selecionada, como chamar o método depositar()
+            }
+        });
+
+        tipoDeConta.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (tipoDeConta.isSelected()) {
+                textoTipo.setText("Poupança");
+            } else {
+                textoTipo.setText("Corrente");
+            }
+        });
     }
 
     @FXML
@@ -219,6 +236,15 @@ public class paginaClienteController implements Initializable {
 
         dadosTitular.clear();
         saldoInicial.clear();
+
+    }
+
+    @FXML
+    private void depositar() throws IOException {
+        Conta selecionada = listaContas.getSelectionModel().getSelectedItem();
+        if (selecionada != null) {
+            selecionada.depositar(Double.parseDouble(depositado.getText()));
+        }
 
     }
 
