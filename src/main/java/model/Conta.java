@@ -5,15 +5,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Random;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 public abstract class Conta implements Comparable<Conta> {
     private static int numeroDeContas = 0;
     private static final Random rand = new Random();
 
     private String titular;
-    private double saldo;
     private int agencia;
     private long numero;
     private LocalDateTime dataEntrada;
+
+    private final DoubleProperty saldo = new SimpleDoubleProperty();
+
+    // other properties and methods...
+
+    public DoubleProperty saldoProperty() {
+        return saldo;
+    }
 
     Conta(String titu) {
         setSaldo(0);
@@ -36,11 +46,11 @@ public abstract class Conta implements Comparable<Conta> {
     }
 
     protected void setSaldo(double newSaldo) {
-        saldo = newSaldo;
+        saldo.set(newSaldo);
     }
 
     public double getSaldo() {
-        return saldo;
+        return saldo.get();
     }
 
     protected void setTitular(String titular) {
@@ -93,7 +103,7 @@ public abstract class Conta implements Comparable<Conta> {
     }
 
     public double rendimentoMensal() {
-        return saldo * 0.1;
+        return saldo.get() * 0.1;
     }
 
     @Override

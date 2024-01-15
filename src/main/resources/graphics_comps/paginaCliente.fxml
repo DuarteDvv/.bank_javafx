@@ -37,27 +37,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane dividerPositions="0.0650887573964497" prefHeight="352.0" prefWidth="340.0">
+                        <SplitPane dividerPositions="0.5828402366863905" prefHeight="352.0" prefWidth="340.0">
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="223.0" styleClass="fundo-cliente">
                                  <children>
                                     <Accordion prefHeight="349.0" prefWidth="333.0" styleClass="fundo-dados" stylesheets="@paginaCliente.css">
                                       <panes>
-                                          <TitledPane animated="false" text="Tranferencia">
-                                            <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fundo-dados" />
-                                            </content>
-                                          </TitledPane>
-                                          <TitledPane animated="false" text="Deposito">
-                                            <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fundo-dados" />
-                                            </content>
-                                          </TitledPane>
-                                        <TitledPane animated="false" prefHeight="39.0" prefWidth="333.0" text="Saque">
-                                          <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fundo-dados" />
-                                          </content>
-                                        </TitledPane>
                                         <TitledPane animated="false" text="Criar conta">
                                           <content>
                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fundo-dados">
@@ -71,6 +56,56 @@
                                                 </AnchorPane>
                                           </content>
                                         </TitledPane>
+                                        <TitledPane animated="false" prefHeight="39.0" prefWidth="333.0" text="Saque">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fundo-dados">
+                                                   <children>
+                                                      <TextField fx:id="sacado" layoutX="8.0" layoutY="52.0" prefHeight="25.0" prefWidth="70.0" promptText="Saque" styleClass="entrada-dados" />
+                                                      <Button layoutX="91.0" layoutY="52.0" mnemonicParsing="false" onAction="#sacar" styleClass="entrada-dados" text="Sacar" />
+                                                      <Label fx:id="contaSelecionadaSaq" layoutX="12.0" layoutY="23.0" prefHeight="17.0" prefWidth="308.0" text="Conta selecionada">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="12.0" layoutY="6.0" text="Conta selecionada:" />
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </TitledPane>
+                                          <TitledPane animated="false" text="Deposito">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fundo-dados">
+                                                   <children>
+                                                      <TextField fx:id="depositado" layoutX="11.0" layoutY="46.0" prefHeight="25.0" prefWidth="79.0" promptText="Deposito" styleClass="entrada-dados" />
+                                                      <Button layoutX="100.0" layoutY="46.0" mnemonicParsing="false" onAction="#depositar" styleClass="entrada-dados" text="Depositar" />
+                                                      <Label fx:id="contaSelecionadaDep" layoutX="12.0" layoutY="23.0" prefHeight="17.0" prefWidth="308.0" text="Conta selecionada">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="11.0" layoutY="6.0" text="Conta selecionada:" />
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </TitledPane>
+                                          <TitledPane animated="false" text="Tranferencia">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fundo-dados">
+                                                   <children>
+                                                      <Label fx:id="contaSelecionadaTrans" layoutX="12.0" layoutY="21.0" prefHeight="17.0" prefWidth="308.0" text="Conta selecionada">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="12.0" layoutY="6.0" text="Conta selecionada:" />
+                                                      <TextField fx:id="tranfereAgencia" layoutX="12.0" layoutY="45.0" prefHeight="25.0" prefWidth="83.0" promptText="Agencia" styleClass="entrada-dados" />
+                                                      <TextField fx:id="tranfereNumero" layoutX="12.0" layoutY="77.0" prefHeight="25.0" prefWidth="83.0" promptText="Numero " styleClass="entrada-dados" />
+                                                      <Button layoutX="23.0" layoutY="156.0" mnemonicParsing="false" onAction="#transfere" styleClass="entrada-dados" text="Tranferir" />
+                                                      <TextField fx:id="transfereSaldo" layoutX="12.0" layoutY="112.0" prefHeight="25.0" prefWidth="84.0" promptText="Transferido" styleClass="entrada-dados" />
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </TitledPane>
                                       </panes>
                                     </Accordion>
                                  </children></AnchorPane>

@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
@@ -32,6 +33,7 @@ import util.PseudoDB;
 public class paginaClienteController implements Initializable {
 
     Cliente atualCliente = App.getCurrentClient();
+    Conta atualConta;
 
     Set<Conta> contas = atualCliente.getContas();
     Set<PlanosDeAuxilio> planos = atualCliente.getPlanos();
@@ -134,6 +136,16 @@ public class paginaClienteController implements Initializable {
             depositado.setText(nomeValidado);
         });
 
+        sacado.textProperty().addListener((observable, oldValue, newValue) -> {
+            String nomeValidado = newValue.replaceAll("[^\\d]", "");
+            sacado.setText(nomeValidado);
+        });
+
+        transfereSaldo.textProperty().addListener((observable, oldValue, newValue) -> {
+            String nomeValidado = newValue.replaceAll("[^\\d]", "");
+            transfereSaldo.setText(nomeValidado);
+        });
+
     }
 
     public void inicializaDados() { // colocar observador
@@ -152,7 +164,6 @@ public class paginaClienteController implements Initializable {
         nAuxilios.setText(Integer.toString(planos.size()));
 
         dadosSaldoTotal.setText(calcularSaldoTotal(listaContas.getItems()));
-
 
     }
 
@@ -182,6 +193,27 @@ public class paginaClienteController implements Initializable {
     @FXML
     private TextField depositado;
 
+    @FXML
+    private TextField sacado;
+
+    @FXML
+    private Label contaSelecionadaDep;
+
+    @FXML
+    private Label contaSelecionadaSaq;
+
+    @FXML
+    private Label contaSelecionadaTrans;
+
+    @FXML
+    private TextField tranfereAgencia;
+
+    @FXML
+    private TextField tranfereNumero;
+
+    @FXML
+    private TextField transfereSaldo;
+
     public void inicializaContas() {
         listaContas.setCellFactory((listView) -> {
             return new ContaCell();
@@ -193,6 +225,7 @@ public class paginaClienteController implements Initializable {
 
         ObservableSet<Conta> observableContas = FXCollections.observableSet(contas);
         observableContas.addListener((SetChangeListener<Conta>) change -> {
+
             if (change.wasAdded()) {
                 // Adicione as contas diretamente na ObservableList
                 observableItens.add(change.getElementAdded());
@@ -204,9 +237,14 @@ public class paginaClienteController implements Initializable {
         observableItens.add(new ContaCorrente("Oiii"));
 
         listaContas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue != null) {
-            Conta selecionada = newValue;
-            // Faça algo com a conta selecionada, como chamar o método depositar()
+            if (newValue != null) {
+                atualConta = newValue;
+                contaSelecionadaDep
+                        .setText(newValue.getTitular() + " Nº: " + newValue.getNumero());
+                contaSelecionadaSaq
+                        .setText(newValue.getTitular() + " Nº: " + newValue.getNumero());
+                contaSelecionadaTrans
+                        .setText(newValue.getTitular() + " Nº: " + newValue.getNumero());
             }
         });
 
@@ -216,6 +254,10 @@ public class paginaClienteController implements Initializable {
             } else {
                 textoTipo.setText("Corrente");
             }
+        });
+
+        listaContas.getItems().addListener((ListChangeListener.Change<? extends Conta> c) -> {
+            nContas.setText(Integer.toString(listaContas.getItems().size()));
         });
     }
 
@@ -241,10 +283,50 @@ public class paginaClienteController implements Initializable {
 
     @FXML
     private void depositar() throws IOException {
-        Conta selecionada = listaContas.getSelectionModel().getSelectedItem();
-        if (selecionada != null) {
-            selecionada.depositar(Double.parseDouble(depositado.getText()));
+        if (atualConta != null) {
+            atualConta.depositar(Double.parseDouble(depositado.getText()));
         }
+
+    }
+
+    @FXML
+    private void sacar() throws IOException {
+        if (atualConta != null) {
+            atualConta.sacar(Double.parseDouble(sacado.getText()));
+        }
+
+    }
+
+    @FXML
+    private void transfere() {
+        Conta contaAlvo = existeContaInterna();
+        if (atualConta != null) {
+            if (contaAlvo != null) {
+                atualConta.transfere(contaAlvo, Double.parseDouble(transfereSaldo.getText()));
+
+            } else {
+                new Alert(AlertType.ERROR) {
+                    {
+                        setTitle("Erro");
+                        setHeaderText("Conta não encontrada");
+                        setContentText("A conta não esta registrada internamente");
+                        showAndWait();
+                    }
+                };
+
+            }
+        }
+    }
+
+    private Conta existeContaInterna() {
+        for (Conta a : listaContas.getItems()) {
+            if (String.valueOf(a.getNumero()).equals(tranfereNumero.getText())
+                    && String.valueOf(a.getAgencia()).equals(tranfereAgencia.getText())) {
+                return a;
+            }
+        }
+
+        return null;
 
     }
 

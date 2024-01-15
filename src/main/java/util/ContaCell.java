@@ -7,10 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.VBox;
 import model.Conta;
+import graphics_comps.App;
 
 import java.time.format.DateTimeFormatter;
-
-import graphics_comps.App;
 
 public class ContaCell extends ListCell<Conta> {
 
@@ -22,12 +21,10 @@ public class ContaCell extends ListCell<Conta> {
         super.updateItem(conta, empty);
 
         if (empty || conta == null) {
-            // Se a célula está vazia, configure-a para exibir vazio
             setText(null);
             setGraphic(null);
             setBackground(null);
         } else {
-            // Caso contrário, personalize a exibição do item usando VBox
             VBox vbox = new VBox();
             vbox.setAlignment(Pos.CENTER_LEFT);
 
@@ -37,18 +34,19 @@ public class ContaCell extends ListCell<Conta> {
             Label agenciaEntradaLabel = new Label(
                     "Entrada: " + DateTimeFormatter.ofPattern("dd/MM/yyyy -- HH:mm").format(conta.getDataEntrada()));
             Label tipoLabel = new Label("Tipo " + conta.getTipoDeConta());
-            Label saldoContaLabel = new Label("Saldo > " + conta.getSaldo());
+
+            // Adiciona um Label específico para o saldo
+            Label saldoContaLabel = new Label();
+            vbox.getChildren().add(saldoContaLabel);
 
             Button btnExcluir = new Button("Excluir");
             btnExcluir.setOnAction(event -> {
                 App.getCurrentClient().apagarConta(conta);
                 ObservableList<Conta> items = getListView().getItems();
                 items.remove(conta);
-
             });
 
-            vbox.getChildren().addAll(tituLabel, numeroETipoContaLabel, agenciaEntradaLabel, tipoLabel,
-                    saldoContaLabel, btnExcluir);
+            vbox.getChildren().addAll(tituLabel, numeroETipoContaLabel, agenciaEntradaLabel, tipoLabel, btnExcluir);
 
             // Configura a célula com o VBox
             setGraphic(vbox);
@@ -61,6 +59,14 @@ public class ContaCell extends ListCell<Conta> {
             } else {
                 setStyle(COR2 + "-fx-border-radius: 10px; -fx-border-color: #000;");
             }
+
+            // Adiciona um listener para atualizar o saldo na célula quando ele for alterado
+            conta.saldoProperty().addListener((observable, oldValue, newValue) -> {
+                saldoContaLabel.setText("Saldo : " + newValue);
+            });
+
+            // Atualiza o saldo inicialmente
+            saldoContaLabel.setText("Saldo : " + conta.getSaldo());
         }
     }
 }
