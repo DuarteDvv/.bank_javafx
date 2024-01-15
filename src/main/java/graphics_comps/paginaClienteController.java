@@ -258,6 +258,7 @@ public class paginaClienteController implements Initializable {
 
         listaContas.getItems().addListener((ListChangeListener.Change<? extends Conta> c) -> {
             nContas.setText(Integer.toString(listaContas.getItems().size()));
+            dadosSaldoTotal.setText(calcularSaldoTotal(listaContas.getItems()));
         });
     }
 
@@ -287,6 +288,8 @@ public class paginaClienteController implements Initializable {
             atualConta.depositar(Double.parseDouble(depositado.getText()));
         }
 
+        dadosSaldoTotal.setText(calcularSaldoTotal(listaContas.getItems()));
+
     }
 
     @FXML
@@ -294,6 +297,8 @@ public class paginaClienteController implements Initializable {
         if (atualConta != null) {
             atualConta.sacar(Double.parseDouble(sacado.getText()));
         }
+
+        dadosSaldoTotal.setText(calcularSaldoTotal(listaContas.getItems()));
 
     }
 
@@ -316,6 +321,8 @@ public class paginaClienteController implements Initializable {
 
             }
         }
+
+        dadosSaldoTotal.setText(calcularSaldoTotal(listaContas.getItems()));
     }
 
     private Conta existeContaInterna() {

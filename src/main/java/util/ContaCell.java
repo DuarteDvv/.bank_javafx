@@ -67,6 +67,7 @@ public class ContaCell extends ListCell<Conta> {
 
             // Atualiza o saldo inicialmente
             saldoContaLabel.setText("Saldo : " + conta.getSaldo());
+
         }
     }
 }
