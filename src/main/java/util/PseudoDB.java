@@ -28,6 +28,11 @@ public class PseudoDB {
         return null;
     }
 
+    public static void trocarSenha(Cliente a, String novaSenha) {
+        container.replace(a, novaSenha);
+
+    }
+
     // Método para verificar se a senha corresponde à digitada
     public static boolean verificarSenha(Cliente cliente, String senhaDigitada) {
         return container.get(cliente).equals(senhaDigitada);

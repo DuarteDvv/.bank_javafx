@@ -1,14 +1,12 @@
 package model;
 
-import java.util.Collections;
-import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
 import java.time.LocalDate;
 
 public class Cliente implements Comparable<Cliente> {
 
-    private String cpf;
+    private final String cpf;
     private String nome;
     private LocalDate dataNascimento;
     private Set<Conta> contas = new HashSet<>();
@@ -34,6 +32,22 @@ public class Cliente implements Comparable<Cliente> {
         return this.cpf;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
     @Override
     public int compareTo(Cliente outroCliente) {
         if (this.nome == null || outroCliente.nome == null) {
@@ -42,20 +56,21 @@ public class Cliente implements Comparable<Cliente> {
         return this.nome.compareToIgnoreCase(outroCliente.nome);
     }
 
-    public void criarConta(Conta novaConta) {
-        contas.add(novaConta);
-    }
-
     public void apagarConta(Conta contaParaApagar) {
         contas.remove(contaParaApagar);
     }
 
+    public void criarConta(Conta a) {
+        contas.add(a);
+
+    }
+
     public Set<Conta> getContas() {
-        return Collections.unmodifiableSet(contas);
+        return contas;
     }
 
     public Set<PlanosDeAuxilio> getPlanos() {
-        return Collections.unmodifiableSet(planos);
+        return planos;
     }
 
 }

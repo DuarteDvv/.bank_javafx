@@ -1,0 +1,32 @@
+.fundo-cliente {
+    -fx-background-color: linear-gradient(to bottom, #87CEEB, #FFFFFF);
+
+}
+
+.botao-voltar {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-padding: 5 10; 
+    -fx-font-size: 10px; 
+    -fx-background-radius: 50; 
+    
+}
+
+.fundo-dados {
+    -fx-background-color: linear-gradient(to bottom, #d3cbcb, #FFFFFF);
+
+}
+
+
+.entrada-dados {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.escrita-dados{
+    -fx-font-family: "Arial Black", Gadget, sans-serif;  
+    -fx-font-size: 11px;
+    -fx-text-fill: #000000; 
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+}

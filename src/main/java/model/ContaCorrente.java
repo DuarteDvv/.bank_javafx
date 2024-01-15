@@ -4,11 +4,11 @@ import util.Tributavel;
 
 public class ContaCorrente extends Conta implements Tributavel {
 
-  ContaCorrente(String titu) {
+  public ContaCorrente(String titu) {
     super(titu);
   }
 
-  ContaCorrente(String titu, double sald) {
+  public ContaCorrente(String titu, double sald) {
     super(titu, sald);
   }
 
@@ -33,6 +33,6 @@ public class ContaCorrente extends Conta implements Tributavel {
 
   @Override
   public String getTipoDeConta() {
-    return "Conta Corrente";
+    return "Corrente";
   }
 }

@@ -19,6 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
         scene = new Scene(loadFXML("login"), 250, 300);
         stage.setScene(scene);
         stage.show();
@@ -39,6 +40,11 @@ public class App extends Application {
 
     public static Cliente getCurrentClient() {
         return currentClient;
+    }
+
+    public static void setDimension(int larg, int alt) {
+        scene.getWindow().setWidth(larg);
+        scene.getWindow().setHeight(alt);
     }
 
     public static void main(String[] args) {

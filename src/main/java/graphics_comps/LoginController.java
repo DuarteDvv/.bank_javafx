@@ -11,6 +11,7 @@ import model.Cliente;
 import util.PseudoDB;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -41,6 +42,8 @@ public class LoginController implements Initializable {
         validaCpf();
         tornarSenhaVisivel();
         ativarColab();
+        // apagar
+        PseudoDB.registrarCliente(new Cliente("99999999999", "Luis", LocalDate.now()), "99999999");
 
     }
 
@@ -107,6 +110,7 @@ public class LoginController implements Initializable {
 
                 } else {
                     // tranfere o objeto cliente para a proxima pagina
+                    App.setDimension(350, 440);
                     App.setCurrentClient(atualClient);
                     App.setRoot("paginaCliente");
                 }

@@ -39,7 +39,7 @@ public abstract class Conta implements Comparable<Conta> {
         saldo = newSaldo;
     }
 
-    protected double getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
@@ -47,7 +47,7 @@ public abstract class Conta implements Comparable<Conta> {
         this.titular = titular;
     }
 
-    protected String getTitular() {
+    public String getTitular() {
         return titular;
     }
 
