@@ -146,6 +146,16 @@ public class paginaClienteController implements Initializable {
             transfereSaldo.setText(nomeValidado);
         });
 
+        tranfereAgencia.textProperty().addListener((observable, oldValue, newValue) -> {
+            String nomeValidado = newValue.replaceAll("[^\\d]", "");
+            tranfereAgencia.setText(nomeValidado);
+        });
+
+        tranfereNumero.textProperty().addListener((observable, oldValue, newValue) -> {
+            String nomeValidado = newValue.replaceAll("[^\\d]", "");
+            tranfereNumero.setText(nomeValidado);
+        });
+
     }
 
     public void inicializaDados() { // colocar observador

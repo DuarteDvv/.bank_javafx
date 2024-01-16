@@ -30,3 +30,34 @@
     -fx-font-weight: bold;
     -fx-padding: 10 20;
 }
+
+.seguro-vida{
+    -fx-background-color: linear-gradient(to bottom, #f36868, #FFFFFF);
+
+}
+
+.alimentacao{
+    -fx-background-color: linear-gradient(to bottom, #65f378, #FFFFFF);
+
+}
+
+.refeicao{
+    -fx-background-color: linear-gradient(to bottom, #edab41, #FFFFFF);
+
+}
+
+.aposentadoria{
+    -fx-background-color: linear-gradient(to bottom, #ca7af0, #FFFFFF);
+
+}
+
+.familia {
+    -fx-background-color: linear-gradient(to bottom, #e95fbd, #FFFFFF);
+
+}
+
+.transporte {
+    -fx-background-color: linear-gradient(to bottom, #5fdbe9, #FFFFFF);
+
+
+}

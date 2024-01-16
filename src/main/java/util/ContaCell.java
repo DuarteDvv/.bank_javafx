@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import model.Conta;
 import graphics_comps.App;
@@ -67,6 +68,13 @@ public class ContaCell extends ListCell<Conta> {
 
             // Atualiza o saldo inicialmente
             saldoContaLabel.setText("Saldo : " + conta.getSaldo());
+
+            // Criar Tooltip com informações da conta
+            Tooltip tooltip = new Tooltip("Titular: " + conta.getTitular() + "\nNúmero: " + conta.getNumero() +
+                    "\nAgência: " + conta.getAgencia() + "\nTipo: " + conta.getTipoDeConta());
+
+            // Associar Tooltip ao elemento
+            Tooltip.install(vbox, tooltip);
 
         }
     }
