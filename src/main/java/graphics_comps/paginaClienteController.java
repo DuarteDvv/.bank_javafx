@@ -331,9 +331,6 @@ public class paginaClienteController implements Initializable {
             }
         });
 
-        observableItens.add(new ContaCorrente("Luis"));
-        observableItens.add(new ContaCorrente("Oiii"));
-
         listaContas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 atualConta = newValue;
