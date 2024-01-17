@@ -10,7 +10,6 @@ public class Cliente implements Comparable<Cliente> {
     private String nome;
     private LocalDate dataNascimento;
     private Set<Conta> contas = new HashSet<>();
-    private Set<PlanosDeAuxilio> planos = new HashSet<>();
 
     public Cliente(String cpf, String nome, LocalDate nascimento) {
         this.cpf = cpf;
@@ -67,10 +66,6 @@ public class Cliente implements Comparable<Cliente> {
 
     public Set<Conta> getContas() {
         return contas;
-    }
-
-    public Set<PlanosDeAuxilio> getPlanos() {
-        return planos;
     }
 
 }

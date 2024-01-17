@@ -5,7 +5,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -28,9 +27,9 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="273.0">
                      <children>
-                          <Button fx:id="secondaryButton" onAction="#voltar" styleClass="botao-voltar" stylesheets="@paginaCliente.css" text="&lt;" />
-                        <ProgressIndicator layoutX="145.0" layoutY="136.0" prefHeight="116.0" prefWidth="109.0" progress="0.0" />
-                        <ProgressBar layoutX="70.0" layoutY="213.0" prefWidth="200.0" progress="0.0" />
+                          <Button fx:id="secondaryButton" layoutX="42.0" layoutY="151.0" onAction="#sairDaConta" styleClass="botao-voltar" stylesheets="@paginaCliente.css" text="Sim" />
+                        <ProgressIndicator fx:id="progressIndicator" layoutX="36.0" layoutY="194.0" prefHeight="75.0" prefWidth="78.0" progress="0.0" visible="false" />
+                        <Label layoutX="42.0" layoutY="121.0" prefHeight="17.0" prefWidth="146.0" text="Realmente deseja sair ??" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -49,58 +48,76 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="seguro-vida">
+                              <VBox fx:id="seguroVida" prefHeight="200.0" prefWidth="100.0" styleClass="seguro-vida">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="177.0" text="Seguro de vida">
                                        <font>
                                           <Font name="Calibri Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="sitSeguro" alignment="CENTER" prefHeight="57.0" prefWidth="174.0" text="Situação" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="174.0" text="100$" />
+                                    <ToggleButton fx:id="tgbSeguro" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" styleClass="btn-transp" text="Modificar" underline="true" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="transporte" GridPane.columnIndex="1">
+                              <VBox fx:id="transporte" prefHeight="200.0" prefWidth="100.0" styleClass="transporte" GridPane.columnIndex="1">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="177.0" text="Transporte">
                                        <font>
                                           <Font name="Calibri Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="sitTransporte" alignment="CENTER" prefHeight="57.0" prefWidth="174.0" text="Situação" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="174.0" text="40$" />
+                                    <ToggleButton fx:id="tgbTrans" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" styleClass="btn-transp" text="Modificar" underline="true" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="alimentacao" GridPane.rowIndex="1">
+                              <VBox fx:id="alimentacao" prefHeight="200.0" prefWidth="100.0" styleClass="alimentacao" GridPane.rowIndex="1">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="177.0" text="Alimentação">
                                        <font>
                                           <Font name="Calibri Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="sitAlimentacao" alignment="CENTER" prefHeight="57.0" prefWidth="174.0" text="Situação" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="174.0" text="50$" />
+                                    <ToggleButton fx:id="tgbAliment" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" styleClass="btn-transp" text="Modificar" underline="true" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="refeicao" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <VBox fx:id="refeicao" prefHeight="200.0" prefWidth="100.0" styleClass="refeicao" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="177.0" text="Refeição">
                                        <font>
                                           <Font name="Calibri Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="sitRefeicao" alignment="CENTER" prefHeight="57.0" prefWidth="174.0" text="Situação" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="174.0" text="20$" />
+                                    <ToggleButton fx:id="tgbRefeicao" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" styleClass="btn-transp" text="Modificar" underline="true" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="aposentadoria" GridPane.rowIndex="2">
+                              <VBox fx:id="aposentadoria" prefHeight="200.0" prefWidth="100.0" styleClass="aposentadoria" GridPane.rowIndex="2">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="177.0" text="Aposentadoria">
                                        <font>
                                           <Font name="Calibri Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="sitAposentadoria" alignment="CENTER" prefHeight="57.0" prefWidth="174.0" text="Situação" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="174.0" text="120$" />
+                                    <ToggleButton fx:id="tgbAposentadoria" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" styleClass="btn-transp" text="Modificar" underline="true" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="familia" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <VBox fx:id="familia" prefHeight="200.0" prefWidth="100.0" styleClass="familia" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="177.0" text="Familia">
                                        <font>
                                           <Font name="Calibri Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="sitFamilia" alignment="CENTER" prefHeight="57.0" prefWidth="174.0" text="Situação" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="174.0" text="80$" />
+                                    <ToggleButton fx:id="tgbFamilia" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" styleClass="btn-transp" text="Modificar" underline="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -202,27 +219,22 @@
                         <Accordion layoutX="72.0" layoutY="46.0" />
                         <AnchorPane layoutY="-5.0" prefHeight="227.0" prefWidth="340.0" styleClass="fundo-dados" stylesheets="@paginaCliente.css">
                            <children>
-                              <Label fx:id="dadosNome" layoutX="92.0" layoutY="23.0" prefHeight="17.0" prefWidth="122.0" stylesheets="@paginaCliente.css" text="Nome" textFill="#46a5e1" underline="true">
+                              <Label fx:id="dadosNome" layoutX="93.0" layoutY="33.0" prefHeight="17.0" prefWidth="122.0" stylesheets="@paginaCliente.css" text="Nome" textFill="#46a5e1" underline="true">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="dadosCPF" layoutX="81.0" layoutY="49.0" prefHeight="17.0" prefWidth="123.0" text="CPF" textFill="#46a5e1" underline="true">
+                              <Label fx:id="dadosCPF" layoutX="81.0" layoutY="68.0" prefHeight="17.0" prefWidth="123.0" text="CPF" textFill="#46a5e1" underline="true">
                                  <font>
                                     <Font name="Calibri Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="dadosData" layoutX="178.0" layoutY="73.0" prefHeight="17.0" prefWidth="122.0" text="Data de nacimento" textFill="#46a5e1" underline="true">
+                              <Label fx:id="dadosData" layoutX="179.0" layoutY="100.0" prefHeight="17.0" prefWidth="122.0" text="Data de nacimento" textFill="#46a5e1" underline="true">
                                  <font>
                                     <Font name="Calibri Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="nContas" layoutX="169.0" layoutY="103.0" prefHeight="17.0" prefWidth="122.0" text="nContas" textFill="#46a5e1" underline="true">
-                                 <font>
-                                    <Font name="Calibri Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="nAuxilios" layoutX="153.0" layoutY="133.0" prefHeight="17.0" prefWidth="122.0" text="nAuxilios" textFill="#46a5e1" underline="true">
+                              <Label fx:id="nContas" layoutX="170.0" layoutY="130.0" prefHeight="17.0" prefWidth="122.0" text="nContas" textFill="#46a5e1" underline="true">
                                  <font>
                                     <Font name="Calibri Bold" size="13.0" />
                                  </font>
@@ -232,12 +244,11 @@
                                     <Font name="Calibri Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="8.0" layoutY="13.0" prefHeight="36.0" prefWidth="87.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="Nome: " />
-                              <Label layoutX="8.0" layoutY="39.0" prefHeight="36.0" prefWidth="87.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="CPF:" />
-                              <Label layoutX="5.0" layoutY="63.0" prefHeight="36.0" prefWidth="176.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="Data de nascimento:" />
-                              <Label layoutX="8.0" layoutY="93.0" prefHeight="36.0" prefWidth="159.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="Numero de contas:" />
-                              <Label layoutX="3.0" layoutY="123.0" prefHeight="36.0" prefWidth="170.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text=" Auxilios ativos:" />
-                              <Label layoutX="8.0" layoutY="153.0" prefHeight="36.0" prefWidth="119.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="Saldo total: " />
+                              <Label layoutX="8.0" layoutY="24.0" prefHeight="36.0" prefWidth="87.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="Nome: " />
+                              <Label layoutX="8.0" layoutY="58.0" prefHeight="36.0" prefWidth="87.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="CPF:" />
+                              <Label layoutX="5.0" layoutY="91.0" prefHeight="36.0" prefWidth="176.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="Data de nascimento:" />
+                              <Label layoutX="2.0" layoutY="121.0" prefHeight="36.0" prefWidth="159.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="Numero de contas:" />
+                              <Label layoutX="2.0" layoutY="154.0" prefHeight="36.0" prefWidth="119.0" styleClass="escrita-dados" stylesheets="@paginaCliente.css" text="Saldo total: " />
                            </children>
                         </AnchorPane>
                         <Accordion layoutY="222.0" prefHeight="149.0" prefWidth="340.0" stylesheets="@paginaCliente.css">
